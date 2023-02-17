@@ -24,7 +24,7 @@ const JobForm = (props) => {
     if (!isEmpty(props.data)) {
       setValues(props.data);
     }
-  }, []);
+  }, [props.data]);
 
   const handleChange = (event) => {
     setValues({
@@ -123,19 +123,19 @@ const JobForm = (props) => {
               <Button type="submit" variant="contained" color="primary">
                 Add
               </Button>
-              &nbsp; &nbsp; &nbsp;{" "}
+              &nbsp; &nbsp; &nbsp;
+              <Button variant="contained" color="primary" onClick={del}>
+                Delete
+              </Button>
             </>
           ) : (
             <>
               <Button type="submit" variant="contained" color="primary">
                 Edit
-              </Button>{" "}
+              </Button>
               &nbsp; &nbsp; &nbsp;
             </>
           )}
-          <Button variant="contained" color="primary" onClick={del}>
-            Delete
-          </Button>{" "}
           &nbsp; &nbsp; &nbsp;
           <Button variant="contained" color="primary" onClick={reset}>
             Reset

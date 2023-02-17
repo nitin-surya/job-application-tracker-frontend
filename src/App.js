@@ -18,7 +18,7 @@ const App = (props) => {
 
   useEffect(() => {
     props.getAllJobs();
-  }, []);
+  }, [props]);
 
   const onRowClick = (rowData) => {
     setSelectedData(rowData);

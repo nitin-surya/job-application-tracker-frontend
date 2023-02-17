@@ -34,11 +34,6 @@ const columns = [
   },
 ];
 
-function createData(company, jobTitle, dateApplied, status) {
-  const link = dateApplied + status;
-  return { company, jobTitle, dateApplied, status, link };
-}
-
 export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
