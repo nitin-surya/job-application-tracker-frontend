@@ -124,9 +124,6 @@ const JobForm = (props) => {
                 Add
               </Button>
               &nbsp; &nbsp; &nbsp;
-              <Button variant="contained" color="primary" onClick={del}>
-                Delete
-              </Button>
             </>
           ) : (
             <>
@@ -134,6 +131,9 @@ const JobForm = (props) => {
                 Edit
               </Button>
               &nbsp; &nbsp; &nbsp;
+              <Button variant="contained" color="primary" onClick={del}>
+                Delete
+              </Button>
             </>
           )}
           &nbsp; &nbsp; &nbsp;
