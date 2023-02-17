@@ -24,7 +24,7 @@ const JobForm = (props) => {
     if (!isEmpty(props.data)) {
       setValues(props.data);
     }
-  }, [props.data]);
+  }, []);
 
   const handleChange = (event) => {
     setValues({
