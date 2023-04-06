@@ -19,6 +19,7 @@ const initialState = {
 };
 const JobForm = (props) => {
   const [values, setValues] = useState(initialState);
+  const [edit] = useState(!isEmpty(props.data));
 
   useEffect(() => {
     if (!isEmpty(props.data)) {
@@ -60,6 +61,7 @@ const JobForm = (props) => {
             value={values.company}
             onChange={handleChange}
             helperText=""
+            disabled={edit}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -70,6 +72,7 @@ const JobForm = (props) => {
             name="jobTitle"
             value={values.jobTitle}
             onChange={handleChange}
+            disabled={edit}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -84,6 +87,7 @@ const JobForm = (props) => {
             InputLabelProps={{
               shrink: true,
             }}
+            disabled={edit}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -115,6 +119,7 @@ const JobForm = (props) => {
             name="link"
             value={values.link}
             onChange={handleChange}
+            disabled={edit}
           />
         </Grid>
         <Grid item xs={12}>
