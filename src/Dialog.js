@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
@@ -75,11 +76,11 @@ export default function CustomizedDialogs(props) {
             delete={props.delete}
           />
         </DialogContent>
-        <DialogActions>
+        {/* <DialogActions>
           <Button autoFocus onClick={handleClose}>
             Close
           </Button>
-        </DialogActions>
+        </DialogActions> */}
       </BootstrapDialog>
     </div>
   );

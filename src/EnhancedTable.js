@@ -2,42 +2,65 @@ import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { styled } from "@mui/material/styles";
+import { useEffect } from "react";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
 const columns = [
-  { id: "company", label: "Company", minWidth: 170 },
-  { id: "jobTitle", label: "Job Title", minWidth: 100 },
+  { id: "sno", label: "S.No", minWidth: 34 },
+  { id: "company", label: "Company", minWidth: 85 },
+  { id: "jobTitle", label: "Job Title", minWidth: 85 },
   {
     id: "dateApplied",
     label: "Date Applied",
-    minWidth: 170,
-    align: "right",
+    minWidth: 85,
+    align: "left",
     //format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "status",
     label: "Status",
-    minWidth: 170,
-    align: "right",
+    minWidth: 85,
+    align: "left",
     //format: (value) => value.toLocaleString("en-US"),
   },
-  {
-    id: "link",
-    label: "Link",
-    minWidth: 170,
-    align: "right",
-    //format: (value) => value.toFixed(2),
-  },
+  // {
+  //   id: "link",
+  //   label: "Link",
+  //   minWidth: 85,
+  //   align: "left",
+  //   //format: (value) => value.toFixed(2),
+  // },
 ];
 
 export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const rows = props.data;
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rows, setRows] = React.useState(props.data);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -57,29 +80,56 @@ export default function EnhancedTable(props) {
     setPage(0);
   };
 
+  useEffect(() => {
+    let data = props.data;
+    if (props.search.length > 0) {
+      data = searchArray(data, props.search);
+      setPage(0);
+    }
+    setRows(data);
+  }, [props.data, props.search]);
+
+  function searchArray(arr, searchString) {
+    const result = arr.filter((obj) =>
+      Object.values(obj).some(
+        (val) =>
+          typeof val === "string" &&
+          val.toLowerCase().includes(searchString.toLowerCase())
+      )
+    );
+    return result;
+  }
+
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper>
+      <TableContainer
+        sx={{
+          marginTop: "15px",
+        }}
+      >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
-                <TableCell
+                <StyledTableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{
+                    minWidth: column.minWidth,
+                    background: "green !important",
+                  }}
                 >
                   {column.label}
-                </TableCell>
+                </StyledTableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row, index) => {
                 return (
-                  <TableRow
+                  <StyledTableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
@@ -96,8 +146,14 @@ export default function EnhancedTable(props) {
                             column.format(value)
                           ) : column.id === "dateApplied" ? (
                             formatDate(value)
-                          ) : column.id === "link" ? (
-                            <a href={value} target="_blank">
+                          ) : column.id === "sno" ? (
+                            page * rowsPerPage + (index + 1)
+                          ) : column.id === "company" ? (
+                            <a
+                              href={row["link"]}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
                               {value}
                             </a>
                           ) : (
@@ -106,7 +162,7 @@ export default function EnhancedTable(props) {
                         </TableCell>
                       );
                     })}
-                  </TableRow>
+                  </StyledTableRow>
                 );
               })}
             {rows.length < 1 && "NO DATA"}

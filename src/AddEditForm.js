@@ -41,7 +41,7 @@ const JobForm = (props) => {
   };
 
   const reset = () => {
-    setValues(initialState);
+    setValues(props.data ? props.data : initialState);
   };
   const del = (event) => {
     event.preventDefault();
@@ -128,7 +128,6 @@ const JobForm = (props) => {
               <Button type="submit" variant="contained" color="primary">
                 Add
               </Button>
-              &nbsp; &nbsp; &nbsp;
             </>
           ) : (
             <>

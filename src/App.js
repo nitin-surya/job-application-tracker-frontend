@@ -10,11 +10,14 @@ import {
 import { connect } from "react-redux";
 import Dialog from "./Dialog";
 import Button from "@mui/material/Button";
+import { TextField } from "@mui/material";
+import Spinner from "./Spinner";
 
 const App = (props) => {
   //const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedData, setSelectedData] = useState({});
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     props.getAllJobs();
@@ -48,23 +51,40 @@ const App = (props) => {
     props.deleteJob(data);
     setOpen(false);
   };
-
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
   return (
     <div className="App">
+      {props.isLoading && <Spinner />}
       <h1>JOB APPLICATION TRACKER</h1>
       <div className="enhanced-table">
         <Button
           variant="contained"
           style={{
-            position: "fixed",
-            right: 65,
-            top: "14%",
+            // position: "fixed",
+            // right: 65,
+            // top: "14%",
+            marginBottom: "10px",
+            height: "54px",
           }}
           onClick={addBtnClick}
         >
           Add Data
         </Button>
-        <EnhancedTable data={props.data} onRowClick={onRowClick} />
+        &nbsp;&nbsp;
+        <TextField
+          id="standard-basic"
+          label="Search"
+          variant="outlined"
+          type="search"
+          onChange={handleSearch}
+        />
+        <EnhancedTable
+          data={props.data}
+          onRowClick={onRowClick}
+          search={search}
+        />
         <Dialog
           close={closeDialog}
           open={open}
@@ -81,6 +101,7 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     data: state.jobReducer.data,
+    isLoading: state.spinnerReducer.isLoading,
   };
 };
 
