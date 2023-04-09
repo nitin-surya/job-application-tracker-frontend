@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/job-application-tracker-frontend/static/css/main.c8f327fd.css",
-    "main.js": "/job-application-tracker-frontend/static/js/main.ae501655.js",
+    "main.css": "/job-application-tracker-frontend/static/css/main.3f497c42.css",
+    "main.js": "/job-application-tracker-frontend/static/js/main.32bcc892.js",
     "static/js/787.68a3810e.chunk.js": "/job-application-tracker-frontend/static/js/787.68a3810e.chunk.js",
     "index.html": "/job-application-tracker-frontend/index.html",
-    "main.c8f327fd.css.map": "/job-application-tracker-frontend/static/css/main.c8f327fd.css.map",
-    "main.ae501655.js.map": "/job-application-tracker-frontend/static/js/main.ae501655.js.map",
+    "main.3f497c42.css.map": "/job-application-tracker-frontend/static/css/main.3f497c42.css.map",
+    "main.32bcc892.js.map": "/job-application-tracker-frontend/static/js/main.32bcc892.js.map",
     "787.68a3810e.chunk.js.map": "/job-application-tracker-frontend/static/js/787.68a3810e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c8f327fd.css",
-    "static/js/main.ae501655.js"
+    "static/css/main.3f497c42.css",
+    "static/js/main.32bcc892.js"
   ]
 }
