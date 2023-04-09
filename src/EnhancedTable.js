@@ -9,7 +9,9 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { styled } from "@mui/material/styles";
 import { useEffect } from "react";
-
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -61,6 +63,9 @@ export default function EnhancedTable(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [rows, setRows] = React.useState(props.data);
+  const [sortAsc, setSortAsc] = React.useState(false);
+  const [sortDesc, setSortDesc] = React.useState(false);
+  const [sortColumn, setSortColumn] = React.useState("");
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -86,10 +91,13 @@ export default function EnhancedTable(props) {
       data = searchArray(data, props.search);
       setPage(0);
     }
+    setSortColumn("");
+    setSortAsc(false);
+    setSortDesc(false);
     setRows(data);
   }, [props.data, props.search]);
 
-  function searchArray(arr, searchString) {
+  const searchArray = (arr, searchString) => {
     const result = arr.filter((obj) =>
       Object.values(obj).some(
         (val) =>
@@ -98,7 +106,53 @@ export default function EnhancedTable(props) {
       )
     );
     return result;
-  }
+  };
+  const headerCellCLicked = (column) => {
+    if (sortColumn !== column) {
+      setSortColumn(column);
+      setSortAsc(true);
+      setSortDesc(false);
+    } else {
+      if (sortAsc) {
+        setSortDesc(true);
+        setSortAsc(false);
+      } else if (sortDesc) {
+        setSortColumn("");
+        setSortDesc(false);
+      }
+    }
+  };
+  const handleSort = (data, property, sortType) => {
+    if (property === "dateApplied" || property === "sno") {
+      data = data.sort((a, b) => {
+        const dateA = property === "sno" ? a[property] : new Date(a[property]);
+        const dateB = property === "sno" ? b[property] : new Date(b[property]);
+        return sortType === "asc" ? dateA - dateB : dateB - dateA;
+      });
+    } else {
+      data = data.sort((a, b) =>
+        a[property].toLowerCase() > b[property].toLowerCase()
+          ? sortType === "asc"
+            ? 1
+            : -1
+          : sortType === "asc"
+          ? -1
+          : 1
+      );
+    }
+    return data;
+  };
+  useEffect(() => {
+    let data = [...rows];
+    if (sortColumn) {
+      let sort = sortAsc === true ? "asc" : "desc";
+      data = handleSort(data, sortColumn, sort);
+    } else {
+      data = props.data;
+    }
+    setRows(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortColumn, sortAsc, sortDesc]);
 
   return (
     <Paper>
@@ -117,9 +171,40 @@ export default function EnhancedTable(props) {
                   style={{
                     minWidth: column.minWidth,
                     background: "green !important",
+                    cursor: "pointer",
                   }}
+                  onClick={() => headerCellCLicked(column.id)}
                 >
                   {column.label}
+                  {column.id !== "sno" && (
+                    <>
+                      {sortColumn !== column.id ? (
+                        <UnfoldMoreIcon
+                          style={{ position: "absolute", cursor: "pointer" }}
+                          onClick={() => {
+                            setSortColumn(column.id);
+                            setSortAsc(true);
+                          }}
+                        />
+                      ) : sortColumn === column.id && sortAsc ? (
+                        <ArrowDropDownIcon
+                          style={{ position: "absolute", cursor: "pointer" }}
+                          onClick={() => {
+                            setSortAsc(false);
+                            setSortDesc(true);
+                          }}
+                        />
+                      ) : (
+                        <ArrowDropUpIcon
+                          style={{ position: "absolute", cursor: "pointer" }}
+                          onClick={() => {
+                            setSortDesc(false);
+                            setSortColumn("");
+                          }}
+                        />
+                      )}
+                    </>
+                  )}
                 </StyledTableCell>
               ))}
             </TableRow>
@@ -147,7 +232,7 @@ export default function EnhancedTable(props) {
                           ) : column.id === "dateApplied" ? (
                             formatDate(value)
                           ) : column.id === "sno" ? (
-                            page * rowsPerPage + (index + 1)
+                            index + 1
                           ) : column.id === "company" ? (
                             <a
                               href={row["link"]}

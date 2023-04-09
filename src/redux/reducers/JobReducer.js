@@ -3,18 +3,19 @@ const initialState = {
 };
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const month = date.getUTCMonth() + 1;
-  const day = date.getUTCDate();
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, "0"); // add leading zero if needed
+  const day = date.getUTCDate().toString().padStart(2, "0"); // add leading zero if needed
   const year = date.getUTCFullYear();
   const formattedDate = `${month}/${day}/${year}`;
   return formattedDate;
 };
 
 const formatData = (data) => {
-  data = data.map((item) => {
+  data = data.map((item, index) => {
     return {
       ...item,
       dateApplied: formatDate(item.dateApplied),
+      sno: index + 1,
     };
   });
   return data;
