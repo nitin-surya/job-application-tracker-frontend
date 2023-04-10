@@ -12,10 +12,12 @@ import Dialog from "./Dialog";
 import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import Spinner from "./Spinner";
+import ConfirmDelete from "./ConfirmDelete";
 
 const App = (props) => {
   //const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openConfirmBox, setOpenConfirmBox] = useState(false);
   const [selectedData, setSelectedData] = useState({});
   const [search, setSearch] = useState("");
 
@@ -30,6 +32,13 @@ const App = (props) => {
 
   const closeDialog = () => {
     setOpen(false);
+  };
+  const closeConfirmBox = () => {
+    setOpenConfirmBox(false);
+  };
+  const onDeleteClick = (rowData) => {
+    setSelectedData(rowData);
+    setOpenConfirmBox(true);
   };
   const addBtnClick = () => {
     setSelectedData({});
@@ -47,9 +56,9 @@ const App = (props) => {
     setOpen(false);
   };
 
-  const deleteData = (data) => {
-    props.deleteJob(data);
-    setOpen(false);
+  const deleteData = () => {
+    props.deleteJob(selectedData);
+    setOpenConfirmBox(false);
   };
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -57,7 +66,7 @@ const App = (props) => {
   return (
     <div className="App">
       {props.isLoading && <Spinner />}
-      <h1>JOB APPLICATION TRACKER</h1>
+      <h1>DASHBOARD</h1>
       <div className="enhanced-table">
         <Button
           variant="contained"
@@ -84,6 +93,8 @@ const App = (props) => {
           data={props.data}
           onRowClick={onRowClick}
           search={search}
+          delete={deleteData}
+          onDeleteClick={onDeleteClick}
         />
         <Dialog
           close={closeDialog}
@@ -92,6 +103,11 @@ const App = (props) => {
           add={addData}
           edit={editData}
           delete={deleteData}
+        />
+        <ConfirmDelete
+          deleteRow={deleteData}
+          open={openConfirmBox}
+          handleClose={closeConfirmBox}
         />
       </div>
     </div>

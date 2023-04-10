@@ -9,6 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { isEmpty } from "lodash";
+import UploadButton from "./UploadButton";
 
 const initialState = {
   company: "",
@@ -122,6 +123,10 @@ const JobForm = (props) => {
             disabled={edit}
           />
         </Grid>
+        {/* <Grid item xs={12} sm={6}>
+          <UploadButton />
+        </Grid> */}
+
         <Grid item xs={12}>
           {isEmpty(props.data) ? (
             <>
@@ -132,7 +137,7 @@ const JobForm = (props) => {
           ) : (
             <>
               <Button type="submit" variant="contained" color="primary">
-                Edit
+                Save
               </Button>
               &nbsp; &nbsp; &nbsp;
               <Button variant="contained" color="primary" onClick={del}>

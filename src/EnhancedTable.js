@@ -12,6 +12,9 @@ import { useEffect } from "react";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import EditIcon from "@mui/icons-material/Edit";
+import { IconButton } from "@mui/material";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -33,7 +36,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const columns = [
-  { id: "sno", label: "S.No", minWidth: 34 },
   { id: "company", label: "Company", minWidth: 85 },
   { id: "jobTitle", label: "Job Title", minWidth: 85 },
   {
@@ -50,6 +52,8 @@ const columns = [
     align: "left",
     //format: (value) => value.toLocaleString("en-US"),
   },
+  { id: "edit", label: "", minWidth: 34, noLabel: true },
+  { id: "delete", label: "", minWidth: 34, noLabel: true },
   // {
   //   id: "link",
   //   label: "Link",
@@ -123,10 +127,10 @@ export default function EnhancedTable(props) {
     }
   };
   const handleSort = (data, property, sortType) => {
-    if (property === "dateApplied" || property === "sno") {
+    if (property === "dateApplied") {
       data = data.sort((a, b) => {
-        const dateA = property === "sno" ? a[property] : new Date(a[property]);
-        const dateB = property === "sno" ? b[property] : new Date(b[property]);
+        const dateA = new Date(a[property]);
+        const dateB = new Date(b[property]);
         return sortType === "asc" ? dateA - dateB : dateB - dateA;
       });
     } else {
@@ -173,10 +177,12 @@ export default function EnhancedTable(props) {
                     background: "green !important",
                     cursor: "pointer",
                   }}
-                  onClick={() => headerCellCLicked(column.id)}
+                  onClick={() =>
+                    column.id !== "edit" ? headerCellCLicked(column.id) : {}
+                  }
                 >
                   {column.label}
-                  {column.id !== "sno" && (
+                  {column.noLabel !== true && (
                     <>
                       {sortColumn !== column.id ? (
                         <UnfoldMoreIcon
@@ -219,9 +225,6 @@ export default function EnhancedTable(props) {
                     role="checkbox"
                     tabIndex={-1}
                     key={row.jobTitle}
-                    onClick={() => {
-                      props.onRowClick(row);
-                    }}
                   >
                     {columns.map((column) => {
                       const value = row[column.id];
@@ -231,8 +234,26 @@ export default function EnhancedTable(props) {
                             column.format(value)
                           ) : column.id === "dateApplied" ? (
                             formatDate(value)
-                          ) : column.id === "sno" ? (
-                            index + 1
+                          ) : column.id === "edit" ? (
+                            <IconButton
+                              // disabled
+                              onClick={() => {
+                                props.onRowClick(row);
+                              }}
+                              sx={{ color: "black" }}
+                            >
+                              <EditIcon />
+                            </IconButton>
+                          ) : column.id === "delete" ? (
+                            <IconButton
+                              // disabled
+                              onClick={() => {
+                                props.onDeleteClick(row);
+                              }}
+                              sx={{ color: "red" }}
+                            >
+                              <DeleteOutlineIcon />
+                            </IconButton>
                           ) : column.id === "company" ? (
                             <a
                               href={row["link"]}
