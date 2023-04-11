@@ -42,18 +42,25 @@ const columns = [
     id: "dateApplied",
     label: "Date Applied",
     minWidth: 85,
-    align: "left",
+    align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "status",
     label: "Status",
     minWidth: 85,
-    align: "left",
+    align: "center",
     //format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "dateLastUpdated",
+    label: "Date Last Updated",
+    minWidth: 85,
+    align: "center",
   },
   { id: "edit", label: "", minWidth: 34, noLabel: true },
   { id: "delete", label: "", minWidth: 34, noLabel: true },
+
   // {
   //   id: "link",
   //   label: "Link",
@@ -77,11 +84,11 @@ export default function EnhancedTable(props) {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const year = date.getFullYear();
-
-    return `${month}/${day}/${year}`;
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, "0"); // add leading zero if needed
+    const day = date.getUTCDate().toString().padStart(2, "0"); // add leading zero if needed
+    const year = date.getUTCFullYear();
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -232,7 +239,9 @@ export default function EnhancedTable(props) {
                         <TableCell key={column.id} align={column.align}>
                           {column.format && typeof value === "number" ? (
                             column.format(value)
-                          ) : column.id === "dateApplied" ? (
+                          ) : ["dateApplied", "dateLastUpdated"].includes(
+                              column.id
+                            ) ? (
                             formatDate(value)
                           ) : column.id === "edit" ? (
                             <IconButton

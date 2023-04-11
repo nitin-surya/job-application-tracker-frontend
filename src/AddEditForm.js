@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { isEmpty } from "lodash";
-import UploadButton from "./UploadButton";
+import moment from "moment";
 
 const initialState = {
   company: "",
@@ -17,6 +17,7 @@ const initialState = {
   dateApplied: "",
   status: "",
   link: "",
+  dateLastUpdated: "",
 };
 const JobForm = (props) => {
   const [values, setValues] = useState(initialState);
@@ -26,9 +27,11 @@ const JobForm = (props) => {
     if (!isEmpty(props.data)) {
       setValues(props.data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event) => {
+    console.log(event.target.value);
     setValues({
       ...values,
       [event.target.name]: event.target.value,
@@ -49,6 +52,14 @@ const JobForm = (props) => {
     props.delete(values);
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, "0"); // add leading zero if needed
+    const day = date.getUTCDate().toString().padStart(2, "0"); // add leading zero if needed
+    const year = date.getUTCFullYear();
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
+  };
   return (
     <form onSubmit={handleSubmit} autoComplete="off">
       <Grid container spacing={3}>
@@ -83,7 +94,9 @@ const JobForm = (props) => {
             label="Date Applied"
             type="date"
             name="dateApplied"
-            value={values.dateApplied}
+            value={moment(formatDate(values.dateApplied))
+              .format("yyyy-MM-DD")
+              .toString()}
             onChange={handleChange}
             InputLabelProps={{
               shrink: true,
@@ -104,14 +117,33 @@ const JobForm = (props) => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value="not-applied">Not-Applied</MenuItem>
-              <MenuItem value="applied">Applied</MenuItem>
-              <MenuItem value="interviewing">Interviewing</MenuItem>
-              <MenuItem value="offer">Offer</MenuItem>
-              <MenuItem value="rejected">Rejected</MenuItem>
+              <MenuItem value="Not Applied">Not-Applied</MenuItem>
+              <MenuItem value="Applied">Applied</MenuItem>
+              <MenuItem value="Rejected">Rejected</MenuItem>
+              <MenuItem value="Written Test">Written Test</MenuItem>
+              <MenuItem value="Interviewing">Interviewing</MenuItem>
+              <MenuItem value="Offer">Offer</MenuItem>
             </Select>
           </FormControl>
         </Grid>
+
+        <Grid item xs={12} sm={6}>
+          <TextField
+            required
+            fullWidth
+            label="Date Last Updated"
+            type="date"
+            name="dateLastUpdated"
+            value={moment(formatDate(values.dateLastUpdated))
+              .format("yyyy-MM-DD")
+              .toString()}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </Grid>
+
         <Grid item xs={12} spacing={3}>
           <TextField
             required
@@ -123,6 +155,7 @@ const JobForm = (props) => {
             disabled={edit}
           />
         </Grid>
+
         {/* <Grid item xs={12} sm={6}>
           <UploadButton />
         </Grid> */}
