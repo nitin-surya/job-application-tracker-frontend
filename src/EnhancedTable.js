@@ -108,6 +108,18 @@ export default function EnhancedTable(props) {
     setRows(data);
   }, [props.data, props.search]);
 
+  useEffect(() => {
+    let data = props.data;
+    if (props.search.length > 0) {
+      data = searchArray(data, props.search);
+      setPage(0);
+    }
+    setSortColumn("");
+    setSortAsc(false);
+    setSortDesc(false);
+    setRows(data);
+  }, [props.data, props.search]);
+
   const searchArray = (arr, searchString) => {
     const result = arr.filter((obj) =>
       Object.values(obj).some(

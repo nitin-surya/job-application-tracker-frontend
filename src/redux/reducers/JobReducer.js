@@ -11,13 +11,15 @@ const formatDate = (dateString) => {
 };
 
 const formatData = (data) => {
-  data = data.map((item, index) => {
-    return {
-      ...item,
-      dateApplied: formatDate(item.dateApplied),
-      sno: index + 1,
-    };
-  });
+  data = data
+    .map((item, index) => {
+      return {
+        ...item,
+        dateApplied: formatDate(item.dateApplied),
+        sno: index + 1,
+      };
+    })
+    .reverse();
   return data;
 };
 

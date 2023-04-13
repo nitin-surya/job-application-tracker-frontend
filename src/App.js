@@ -23,6 +23,7 @@ const App = (props) => {
 
   useEffect(() => {
     props.getAllJobs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onRowClick = (rowData) => {
