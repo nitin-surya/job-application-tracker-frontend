@@ -67,7 +67,8 @@ const App = (props) => {
   return (
     <div className="App">
       {props.isLoading && <Spinner />}
-      <h1>DASHBOARD</h1>
+      {/* <h1>DASHBOARD</h1> */}
+
       <div className="enhanced-table">
         <Button
           variant="contained"
