@@ -13,6 +13,8 @@ import Button from "@mui/material/Button";
 import { TextField } from "@mui/material";
 import Spinner from "./Spinner";
 import ConfirmDelete from "./ConfirmDelete";
+import JobForm from "./AddEditForm";
+import { isEmpty } from "lodash";
 
 const App = (props) => {
   //const [data, setData] = useState([]);
@@ -81,7 +83,7 @@ const App = (props) => {
           }}
           onClick={addBtnClick}
         >
-          Add Data
+          Add
         </Button>
         &nbsp;&nbsp;
         <TextField
@@ -101,15 +103,24 @@ const App = (props) => {
         <Dialog
           close={closeDialog}
           open={open}
-          data={selectedData}
-          add={addData}
-          edit={editData}
-          delete={deleteData}
+          title={!isEmpty(selectedData) ? "EDIT DATA" : "ADD DATA"}
+          content={
+            <JobForm
+              data={selectedData}
+              add={addData}
+              edit={editData}
+              delete={deleteData}
+            />
+          }
         />
-        <ConfirmDelete
-          deleteRow={deleteData}
+        <Dialog
+          close={closeConfirmBox}
+          title={"Are you sure to delete?"}
           open={openConfirmBox}
-          handleClose={closeConfirmBox}
+          content={
+            <ConfirmDelete delete={deleteData} close={closeConfirmBox} />
+          }
+          hideCloseIcon
         />
       </div>
     </div>

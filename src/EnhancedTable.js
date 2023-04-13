@@ -36,30 +36,30 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const columns = [
-  { id: "company", label: "Company", minWidth: 85 },
-  { id: "jobTitle", label: "Job Title", minWidth: 85 },
+  { id: "company", label: "Company", minWidth: "16.6%" },
+  { id: "jobTitle", label: "Job Title", minWidth: "28.6%" },
   {
     id: "dateApplied",
     label: "Date Applied",
-    minWidth: 85,
+    minWidth: "12.6%",
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "status",
     label: "Status",
-    minWidth: 85,
+    minWidth: "12.6%",
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "dateLastUpdated",
     label: "Date Last Updated",
-    minWidth: 85,
+    minWidth: "12.6%",
     align: "center",
   },
-  { id: "edit", label: "", minWidth: 34, noLabel: true },
-  { id: "delete", label: "", minWidth: 34, noLabel: true },
+  { id: "edit", label: "", minWidth: "8.3", noLabel: true },
+  { id: "delete", label: "", minWidth: "8.3%", noLabel: true },
 
   // {
   //   id: "link",
@@ -178,7 +178,7 @@ export default function EnhancedTable(props) {
   }, [sortColumn, sortAsc, sortDesc]);
 
   return (
-    <Paper>
+    <Paper style={{ boxShadow: "0 10px 20px rgba(0,0,0,.2)" }}>
       <TableContainer
         sx={{
           marginTop: "15px",
@@ -193,6 +193,7 @@ export default function EnhancedTable(props) {
                   align={column.align}
                   style={{
                     minWidth: column.minWidth,
+                    width: column.minWidth,
                     background: "green !important",
                     cursor: "pointer",
                   }}

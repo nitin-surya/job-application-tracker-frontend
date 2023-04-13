@@ -1,38 +1,21 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import React from "react";
+import { Button, Grid } from "@mui/material";
 
 const ConfirmDelete = (props) => {
   return (
-    <div>
-      <Dialog
-        open={props.open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={props.handleClose}
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle>{""}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Are you sure to delete?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.deleteRow}>Yes</Button>
-          <Button onClick={props.handleClose}>No</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+    <form autoComplete="off" style={{ minWidth: "250px", textAlign: "center" }}>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Button variant="contained" color="success" onClick={props.delete}>
+            Yes
+          </Button>
+          &nbsp; &nbsp; &nbsp;
+          <Button variant="contained" color="error" onClick={props.close}>
+            NO
+          </Button>
+        </Grid>
+      </Grid>
+    </form>
   );
 };
 export default ConfirmDelete;

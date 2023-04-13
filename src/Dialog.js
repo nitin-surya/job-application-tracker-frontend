@@ -10,7 +10,6 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { isEmpty } from "lodash";
-import Form from "./AddEditForm";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -22,7 +21,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function BootstrapDialogTitle(props) {
-  const { children, onClose, ...other } = props;
+  const { children, onClose, hideCloseIcon, ...other } = props;
 
   return (
     <DialogTitle
@@ -35,7 +34,7 @@ function BootstrapDialogTitle(props) {
       {...other}
     >
       {children}
-      {onClose ? (
+      {onClose && !hideCloseIcon ? (
         <IconButton
           aria-label="close"
           onClick={onClose}
@@ -75,17 +74,11 @@ export default function CustomizedDialogs(props) {
         <BootstrapDialogTitle
           id="customized-dialog-title"
           onClose={handleClose}
+          hideCloseIcon={props.hideCloseIcon}
         >
-          {isEmpty(props.data) ? "ADD DATA" : "EDIT DATA"}
+          {props.title}
         </BootstrapDialogTitle>
-        <DialogContent dividers>
-          <Form
-            data={props.data}
-            add={props.add}
-            edit={props.edit}
-            delete={props.delete}
-          />
-        </DialogContent>
+        <DialogContent dividers>{props.content}</DialogContent>
         {/* <DialogActions>
           <Button autoFocus onClick={handleClose}>
             Close
