@@ -119,6 +119,7 @@ const JobForm = (props) => {
               </MenuItem>
               <MenuItem value="Not Applied">Not-Applied</MenuItem>
               <MenuItem value="Applied">Applied</MenuItem>
+              <MenuItem value="Screening">Screening</MenuItem>
               <MenuItem value="Rejected">Rejected</MenuItem>
               <MenuItem value="Written Test">Written Test</MenuItem>
               <MenuItem value="Interviewing">Interviewing</MenuItem>
