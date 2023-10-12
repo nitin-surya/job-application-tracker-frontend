@@ -40,24 +40,33 @@ const columns = [
   { id: "jobTitle", label: "Job Title", minWidth: "28.6%" },
   {
     id: "dateApplied",
-    label: "Date Applied",
-    minWidth: "12.6%",
+    label: "Date Added",
+    minWidth: "20.6%",
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
-  {
-    id: "status",
-    label: "Status",
-    minWidth: "12.6%",
+
+   {
+    id: "updatedBy",
+    label: "Updated By",
+    minWidth: "20.6%",
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
-  {
-    id: "dateLastUpdated",
-    label: "Date Last Updated",
-    minWidth: "12.6%",
-    align: "center",
-  },
+
+  // {
+  //   id: "status",
+  //   label: "Status",
+  //   minWidth: "12.6%",
+  //   align: "center",
+  //   //format: (value) => value.toLocaleString("en-US"),
+  // },
+  // {
+  //   id: "dateLastUpdated",
+  //   label: "Date Last Updated",
+  //   minWidth: "12.6%",
+  //   align: "center",
+  // },
   { id: "edit", label: "", minWidth: "8.3", noLabel: true },
   { id: "delete", label: "", minWidth: "8.3%", noLabel: true },
 

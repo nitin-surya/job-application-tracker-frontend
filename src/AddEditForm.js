@@ -8,7 +8,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { isEmpty } from "lodash";
+import { isEmpty, values } from "lodash";
 import moment from "moment";
 
 const initialState = {
@@ -18,10 +18,12 @@ const initialState = {
   status: "",
   link: "",
   dateLastUpdated: "",
+  updatedBy:""
 };
 const JobForm = (props) => {
   const [values, setValues] = useState(initialState);
-  const [edit] = useState(!isEmpty(props.data));
+  // const [edit] = useState(!isEmpty(props.data));
+  const [edit] = useState(false);
 
   useEffect(() => {
     if (!isEmpty(props.data)) {
@@ -40,8 +42,14 @@ const JobForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (isEmpty(props.data)) props.add(values);
-    else props.edit(values);
+    let formData={...values}
+    formData={
+      ...formData,
+      dateLastUpdated:formData.dateApplied,
+      status:"Applied",
+    }
+    if (isEmpty(props.data)) props.add(formData);
+    else props.edit(formData);
   };
 
   const reset = () => {
@@ -91,7 +99,7 @@ const JobForm = (props) => {
           <TextField
             required
             fullWidth
-            label="Date Applied"
+            label="Date Added"
             type="date"
             name="dateApplied"
             value={moment(formatDate(values.dateApplied))
@@ -104,7 +112,7 @@ const JobForm = (props) => {
             disabled={edit}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <FormControl fullWidth>
             <InputLabel id="status-label">Status</InputLabel>
             <Select
@@ -126,9 +134,9 @@ const JobForm = (props) => {
               <MenuItem value="Offer">Offer</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={12} sm={6}>
+        {/* <Grid item xs={12} sm={6}>
           <TextField
             required
             fullWidth
@@ -142,6 +150,19 @@ const JobForm = (props) => {
             InputLabelProps={{
               shrink: true,
             }}
+          />
+        </Grid> */}
+        <Grid item xs={12} sm={6}>
+        <TextField
+            required
+            error={false}
+            fullWidth
+            label="Updated By"
+            name="updatedBy"
+            value={values.updatedBy}
+            onChange={handleChange}
+            helperText=""
+            disabled={edit}
           />
         </Grid>
 
