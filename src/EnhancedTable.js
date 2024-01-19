@@ -150,6 +150,10 @@ export default function EnhancedTable(props) {
         setSortAsc(false);
       } else if (sortDesc) {
         setSortColumn("");
+
+
+
+        
         setSortDesc(false);
       }
     }

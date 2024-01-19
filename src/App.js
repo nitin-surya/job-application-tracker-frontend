@@ -24,6 +24,7 @@ const App = (props) => {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
+   
     props.getAllJobs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
