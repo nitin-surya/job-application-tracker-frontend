@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/actions/AuthActions";
 import { Drawer } from "@mui/material";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 function ResponsiveDrawer(props) {
   const { window, children, toggleTheme } = props;
@@ -159,7 +159,7 @@ function ResponsiveDrawer(props) {
           display: "flex",
           flexDirection: "column",
           minHeight: "100vh",
-          // width: `calc(100% - ${drawerWidth}px)`,
+          width: `calc(100% - ${drawerWidth}px)`,
         }}
       >
         <Toolbar />

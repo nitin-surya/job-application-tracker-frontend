@@ -15,6 +15,8 @@ import Spinner from "../Spinner";
 import ConfirmDelete from "./ConfirmDelete";
 import JobForm from "./AddEditForm";
 import { isEmpty } from "lodash";
+import AddIcon from "@mui/icons-material/Add";
+import SyncIcon from "@mui/icons-material/Sync";
 
 const HomePage = (props) => {
   //const [data, setData] = useState([]);
@@ -66,6 +68,11 @@ const HomePage = (props) => {
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
+
+  const refreshData = (event) => {
+    props.getAllJobs();
+  };
+
   return (
     <div className="App">
       {props.isLoading && <Spinner />}
@@ -83,7 +90,21 @@ const HomePage = (props) => {
           }}
           onClick={addBtnClick}
         >
-          Add
+          <AddIcon />
+        </Button>
+        &nbsp;&nbsp;
+        <Button
+          variant="contained"
+          style={{
+            // position: "fixed",
+            // right: 65,
+            // top: "14%",
+            marginBottom: "10px",
+            height: "54px",
+          }}
+          onClick={refreshData}
+        >
+          <SyncIcon />
         </Button>
         &nbsp;&nbsp;
         <TextField
