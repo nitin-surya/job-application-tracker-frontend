@@ -15,8 +15,8 @@ import { useTheme } from "@mui/material/styles";
 
 const Login = () => {
   const [userData, setUserData] = useState({
-    username: "nitinsurya",
-    password: "nitinsurya",
+    username: "",
+    password: "",
   });
   const [errors, setErrors] = useState({});
   const [snackbar, setSnackbar] = useState({
