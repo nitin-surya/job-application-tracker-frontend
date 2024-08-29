@@ -9,7 +9,7 @@ import {
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
-import HomePage from "./components/job-application-tracker-frontendPage"; // Main page with the table
+import HomePage from "./components/HomePage"; // Main page with the table
 import { useSelector } from "react-redux";
 import Layout from "./components/Layout";
 import { lightTheme, darkTheme } from "./components/Theme";
