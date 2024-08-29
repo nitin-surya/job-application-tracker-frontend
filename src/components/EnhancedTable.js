@@ -15,6 +15,8 @@ import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import EditIcon from "@mui/icons-material/Edit";
 import { IconButton } from "@mui/material";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import Link from "@mui/material/Link";
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -46,21 +48,42 @@ const columns = [
     //format: (value) => value.toLocaleString("en-US"),
   },
 
-   {
-    id: "updatedBy",
-    label: "Updated By",
+  //  {
+  //   id: "updatedBy",
+  //   label: "Updated By",
+  //   minWidth: "20.6%",
+  //   align: "center",
+  //   //format: (value) => value.toLocaleString("en-US"),
+  // },
+  {
+    id: "jobType",
+    label: "Job Type",
+    minWidth: "12.6%",
+    align: "center",
+    //format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "jobMode",
+    label: "Job Mode",
+    minWidth: "12.6%",
+    align: "center",
+    //format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "location",
+    label: "location",
     minWidth: "20.6%",
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
 
-  // {
-  //   id: "status",
-  //   label: "Status",
-  //   minWidth: "12.6%",
-  //   align: "center",
-  //   //format: (value) => value.toLocaleString("en-US"),
-  // },
+  {
+    id: "status",
+    label: "Status",
+    minWidth: "12.6%",
+    align: "center",
+    //format: (value) => value.toLocaleString("en-US"),
+  },
   // {
   //   id: "dateLastUpdated",
   //   label: "Date Last Updated",
@@ -151,9 +174,6 @@ export default function EnhancedTable(props) {
       } else if (sortDesc) {
         setSortColumn("");
 
-
-
-        
         setSortDesc(false);
       }
     }
@@ -290,13 +310,13 @@ export default function EnhancedTable(props) {
                               <DeleteOutlineIcon />
                             </IconButton>
                           ) : column.id === "company" ? (
-                            <a
+                            <Link
                               href={row["link"]}
                               target="_blank"
-                              rel="noreferrer"
+                              rel="noopener noreferrer"
                             >
                               {value}
-                            </a>
+                            </Link>
                           ) : (
                             value
                           )}

@@ -27,10 +27,12 @@ export const addJob = (data) => {
       .then((res) => {
         dispatch({ type: actionTypes.ADD_JOB, payload: res.data.data });
         dispatch({ type: actionTypes.STOP_SPINNER, payload: false });
+        return res.data.message;
       })
       .catch((error) => {
         dispatch({ type: actionTypes.ADD_JOB, payload: [] });
         dispatch({ type: actionTypes.STOP_SPINNER, payload: false });
+        return error.response.message;
       });
   };
 };
