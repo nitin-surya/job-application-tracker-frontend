@@ -20,14 +20,14 @@ const AppRouter = () => {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/login" exact>
+          <Route path="/job-application-tracker-frontend/login" exact>
             {isAuthenticated ? (
               <Redirect to="/job-application-tracker-frontend" />
             ) : (
               <Login />
             )}
           </Route>
-          <Route path="/signup" exact>
+          <Route path="/job-application-tracker-frontend/signup" exact>
             {isAuthenticated ? (
               <Redirect to="/job-application-tracker-frontend" />
             ) : (
@@ -40,16 +40,16 @@ const AppRouter = () => {
                 <EnhancedTable />
               </Layout>
             ) : (
-              <Redirect to="/login" />
+              <Redirect to="/job-application-tracker-frontend/login" />
             )}
           </Route>
-          <Route path="/dashboard" exact>
+          <Route path="/job-application-tracker-frontend/dashboard" exact>
             {isAuthenticated ? (
               <Layout>
                 <Dashboard />
               </Layout>
             ) : (
-              <Redirect to="/login" />
+              <Redirect to="/job-application-tracker-frontend/login" />
             )}
           </Route>
         </Switch>

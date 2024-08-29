@@ -121,7 +121,7 @@ const Login = () => {
         >
           Don't have an account?{" "}
           <Link
-            to="/signup"
+            to="/job-application-tracker-frontend/signup"
             style={{
               color: theme.palette.primary.main,
               textDecoration: "none",

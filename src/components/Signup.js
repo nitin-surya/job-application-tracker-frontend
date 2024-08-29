@@ -56,7 +56,7 @@ const Signup = () => {
           severity: "success",
         });
         setTimeout(() => {
-          navigate("/login");
+          navigate("/job-application-tracker-frontend/login");
         }, 2000);
       } else {
         setSnackbar({ open: true, message: result.message, severity: "error" });
@@ -141,7 +141,7 @@ const Signup = () => {
         >
           Back to login?{" "}
           <Link
-            to="/login"
+            to="/job-application-tracker-frontend/login"
             style={{
               color: theme.palette.primary.main,
               textDecoration: "none",

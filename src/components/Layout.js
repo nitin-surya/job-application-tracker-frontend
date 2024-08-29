@@ -38,7 +38,7 @@ function ResponsiveDrawer(props) {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate("/login");
+    navigate("/job-application-tracker-frontend/login");
   };
 
   const drawer = (
@@ -46,7 +46,11 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <List>
         <ListItem key="Dashboard" disablePadding>
-          <ListItemButton onClick={() => navigate("/dashboard")}>
+          <ListItemButton
+            onClick={() =>
+              navigate("/job-application-tracker-frontend/dashboard")
+            }
+          >
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>

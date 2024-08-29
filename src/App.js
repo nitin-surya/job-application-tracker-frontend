@@ -47,12 +47,12 @@ const App = () => {
                   <HomePage />{" "}
                 </Layout>
               ) : (
-                <Navigate to="/login" />
+                <Navigate to="/job-application-tracker-frontend/login" />
               )
             }
           />
           <Route
-            path="/login"
+            path="/job-application-tracker-frontend/login"
             element={
               user ? (
                 <Navigate to="/job-application-tracker-frontend" />
@@ -62,7 +62,7 @@ const App = () => {
             }
           />
           <Route
-            path="/signup"
+            path="/job-application-tracker-frontend/signup"
             element={
               user ? (
                 <Navigate to="/job-application-tracker-frontend" />
@@ -72,18 +72,21 @@ const App = () => {
             }
           />
           <Route
-            path="/dashboard"
+            path="/job-application-tracker-frontend/dashboard"
             element={
               user ? (
                 <Layout toggleTheme={toggleTheme}>
                   <Dashboard />{" "}
                 </Layout>
               ) : (
-                <Navigate to="/login" />
+                <Navigate to="/job-application-tracker-frontend/login" />
               )
             }
           />
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route
+            path="*"
+            element={<Navigate to="/job-application-tracker-frontend/login" />}
+          />
         </Routes>
       </Container>
     </ThemeProvider>
