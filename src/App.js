@@ -40,7 +40,7 @@ const App = () => {
       <Container>
         <Routes>
           <Route
-            path="/"
+            path="/job-application-tracker"
             element={
               user ? (
                 <Layout toggleTheme={toggleTheme}>

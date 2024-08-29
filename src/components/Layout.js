@@ -54,7 +54,7 @@ function ResponsiveDrawer(props) {
           </ListItemButton>
         </ListItem>
         <ListItem key="Home Page" disablePadding>
-          <ListItemButton onClick={() => navigate("/")}>
+          <ListItemButton onClick={() => navigate("/job-application-tracker")}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>

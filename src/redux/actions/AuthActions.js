@@ -28,7 +28,7 @@ export const loginUser = (userData, navigate) => {
       });
 
       // Navigate to the home page after successful login
-      navigate("/");
+      navigate("/job-application-tracker");
       return { success: true, message: res.data.message }; // Return success and message
     } catch (err) {
       console.log("Login failed", err);
