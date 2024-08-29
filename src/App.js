@@ -9,7 +9,7 @@ import {
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
-import HomePage from "./components/HomePage"; // Main page with the table
+import HomePage from "./components/job-application-tracker-frontendPage"; // Main page with the table
 import { useSelector } from "react-redux";
 import Layout from "./components/Layout";
 import { lightTheme, darkTheme } from "./components/Theme";
@@ -40,7 +40,7 @@ const App = () => {
       <Container>
         <Routes>
           <Route
-            path="/home"
+            path="/job-application-tracker-frontend"
             element={
               user ? (
                 <Layout toggleTheme={toggleTheme}>
@@ -53,11 +53,23 @@ const App = () => {
           />
           <Route
             path="/login"
-            element={user ? <Navigate to="/home" /> : <Login />}
+            element={
+              user ? (
+                <Navigate to="/job-application-tracker-frontend" />
+              ) : (
+                <Login />
+              )
+            }
           />
           <Route
             path="/signup"
-            element={user ? <Navigate to="/home" /> : <Signup />}
+            element={
+              user ? (
+                <Navigate to="/job-application-tracker-frontend" />
+              ) : (
+                <Signup />
+              )
+            }
           />
           <Route
             path="/dashboard"
