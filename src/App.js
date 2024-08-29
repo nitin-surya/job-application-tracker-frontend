@@ -53,11 +53,15 @@ const App = () => {
           />
           <Route
             path="/login"
-            element={user ? <Navigate to="/" /> : <Login />}
+            element={
+              user ? <Navigate to="/job-application-tracker" /> : <Login />
+            }
           />
           <Route
             path="/signup"
-            element={user ? <Navigate to="/" /> : <Signup />}
+            element={
+              user ? <Navigate to="/job-application-tracker" /> : <Signup />
+            }
           />
           <Route
             path="/dashboard"
