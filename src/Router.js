@@ -21,20 +21,12 @@ const AppRouter = () => {
       <Router>
         <Switch>
           <Route path="/login" exact>
-            {isAuthenticated ? (
-              <Redirect to="/job-application-tracker" />
-            ) : (
-              <Login />
-            )}
+            {isAuthenticated ? <Redirect to="/home" /> : <Login />}
           </Route>
           <Route path="/signup" exact>
-            {isAuthenticated ? (
-              <Redirect to="/job-application-tracker" />
-            ) : (
-              <Signup />
-            )}
+            {isAuthenticated ? <Redirect to="/home" /> : <Signup />}
           </Route>
-          <Route path="/job-application-tracker" exact>
+          <Route path="/home" exact>
             {isAuthenticated ? (
               <Layout>
                 <EnhancedTable />

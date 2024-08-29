@@ -40,7 +40,7 @@ const App = () => {
       <Container>
         <Routes>
           <Route
-            path="/job-application-tracker"
+            path="/home"
             element={
               user ? (
                 <Layout toggleTheme={toggleTheme}>
@@ -53,15 +53,11 @@ const App = () => {
           />
           <Route
             path="/login"
-            element={
-              user ? <Navigate to="/job-application-tracker" /> : <Login />
-            }
+            element={user ? <Navigate to="/home" /> : <Login />}
           />
           <Route
             path="/signup"
-            element={
-              user ? <Navigate to="/job-application-tracker" /> : <Signup />
-            }
+            element={user ? <Navigate to="/home" /> : <Signup />}
           />
           <Route
             path="/dashboard"
@@ -75,6 +71,7 @@ const App = () => {
               )
             }
           />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Container>
     </ThemeProvider>
