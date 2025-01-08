@@ -1,5 +1,6 @@
 const initialState = {
   data: [],
+  yearOptions: [],
 };
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -25,6 +26,12 @@ const formatData = (data) => {
 
 const jobReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_YEARS":
+      return {
+        ...state,
+        yearOptions: action.payload,
+      };
+
     case "GET_ALL_JOBS":
       return {
         ...state,

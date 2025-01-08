@@ -1,4 +1,5 @@
 export const GET_ALL_JOBS = "GET_ALL_JOBS";
+export const GET_YEARS = "GET_YEARS";
 export const ADD_JOB = "ADD_JOB";
 export const EDIT_JOB = "EDIT_JOB";
 export const DELETE_JOB = "DELETE_JOB";
@@ -9,3 +10,10 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGOUT = "LOGOUT";
+// Dashboard
+export const GET_THIS_WEEK_DATA = "GET_THIS_WEEK_DATA";
+export const GET_THIS_MONTH_DATA = "GET_THIS_MONTH_DATA";
+export const GET_YEARLY_DATA = "GET_YEARLY_DATA";
+export const GET_LAST_30_DAYS_DATA = "GET_LAST_30_DAYS_DATA";
+export const GET_LAST_7_DAYS_DATA = "GET_LAST_7_DAYS_DATA";
+export const GET_TODAY_DATA = "GET_TODAY_DATA";

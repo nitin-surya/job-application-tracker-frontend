@@ -26,6 +26,7 @@ const initialState = {
   location: "",
   jobType: "",
   jobMode: "",
+  source: "",
 };
 
 const JobForm = (props) => {
@@ -63,6 +64,7 @@ const JobForm = (props) => {
     tempErrors.location = values.location ? "" : "Location is required.";
     tempErrors.jobType = values.jobType ? "" : "Job Type is required.";
     tempErrors.status = values.status ? "" : "Status is required.";
+    tempErrors.source = values.source ? "" : "Source is required.";
     tempErrors.link = values.link
       ? /^https?:\/\/\S+$/.test(values.link)
         ? ""
@@ -125,7 +127,7 @@ const JobForm = (props) => {
     <Container maxWidth="md">
       <Box component="form">
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               required
               fullWidth
@@ -138,7 +140,7 @@ const JobForm = (props) => {
               disabled={edit}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               required
               fullWidth
@@ -151,7 +153,7 @@ const JobForm = (props) => {
               disabled={edit}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               required
               fullWidth
@@ -170,7 +172,7 @@ const JobForm = (props) => {
               disabled={edit}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <TextField
               required
               fullWidth
@@ -183,7 +185,7 @@ const JobForm = (props) => {
               disabled={edit}
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <FormControl fullWidth error={!!errors.jobMode}>
               <InputLabel id="job-mode-label">Job Mode</InputLabel>
               <Select
@@ -204,9 +206,11 @@ const JobForm = (props) => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <FormControl fullWidth error={!!errors.jobType}>
-              <InputLabel id="job-type-label">Job Type</InputLabel>
+              <InputLabel required id="job-type-label">
+                Job Type
+              </InputLabel>
               <Select
                 required
                 labelId="job-type-label"
@@ -226,9 +230,11 @@ const JobForm = (props) => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
             <FormControl fullWidth error={!!errors.status}>
-              <InputLabel id="status-label">Status</InputLabel>
+              <InputLabel required id="status-label">
+                Status
+              </InputLabel>
               <Select
                 required
                 labelId="status-label"
@@ -252,7 +258,35 @@ const JobForm = (props) => {
             </FormControl>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={4}>
+            <FormControl fullWidth error={!!errors.source}>
+              <InputLabel required id="source-label">
+                Source
+              </InputLabel>
+              <Select
+                required
+                labelId="source-label"
+                name="source"
+                label="source"
+                value={values.source}
+                onChange={handleChange}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value="LinkedIn">LinkedIn</MenuItem>
+                <MenuItem value="Dice">Dice</MenuItem>
+                <MenuItem value="Monster">Monster</MenuItem>
+                <MenuItem value="Indeed">Indeed</MenuItem>
+                <MenuItem value="Built In">Built In</MenuItem>
+                <MenuItem value="Zip Recruiter">Zip Recruiter</MenuItem>
+                <MenuItem value="Email">Email</MenuItem>
+              </Select>
+              <FormHelperText>{errors.source}</FormHelperText>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={4}>
             <TextField
               required
               fullWidth

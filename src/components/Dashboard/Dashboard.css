@@ -1,0 +1,24 @@
+/* src/components/Dashboard.css */
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  
+  .bar-chart-container {
+    margin-bottom: 16px;
+  }
+  
+  .pie-charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .pie-chart {
+    flex: 1 1 calc(50% - 16px); /* Adjust this value for desired width */
+    min-width: 300px; /* Ensures charts don't get too small */
+  }
+  

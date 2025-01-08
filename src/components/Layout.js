@@ -9,28 +9,29 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
 import MenuIcon from "@mui/icons-material/Menu";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../redux/actions/AuthActions";
 import { Drawer } from "@mui/material";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 const drawerWidth = 200;
 
 function ResponsiveDrawer(props) {
-  const { window, children, toggleTheme } = props;
+  const { children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [openDashboard, setOpenDashboard] = React.useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useSelector((state) => state.authReducer.user?.username);
-  const themeMode = useSelector((state) => state.themeReducer.mode);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -41,22 +42,89 @@ function ResponsiveDrawer(props) {
     navigate("/job-application-tracker-frontend/login");
   };
 
+  const handleDashboardClick = () => {
+    setOpenDashboard(!openDashboard);
+  };
+
   const drawer = (
     <div>
       <Toolbar />
       <List>
-        <ListItem key="Dashboard" disablePadding>
-          <ListItemButton
-            onClick={() =>
-              navigate("/job-application-tracker-frontend/dashboard")
-            }
-          >
+        {/* <ListItem key="Dashboard" disablePadding>
+          <ListItemButton onClick={handleDashboardClick}>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
+            {openDashboard ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
+        <Collapse in={openDashboard} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem key="Yearly" disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  navigate("/job-application-tracker-frontend/dashboard/yearly")
+                }
+              >
+                <ListItemText primary="Yearly" sx={{ pl: 4 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key="This Month" disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  navigate(
+                    "/job-application-tracker-frontend/dashboard/this-month"
+                  )
+                }
+              >
+                <ListItemText primary="This Month" sx={{ pl: 4 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key="Last 30 Days" disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  navigate(
+                    "/job-application-tracker-frontend/dashboard/last-30-days"
+                  )
+                }
+              >
+                <ListItemText primary="Last 30 Days" sx={{ pl: 4 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key="Last 7 Days" disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  navigate(
+                    "/job-application-tracker-frontend/dashboard/last-7-days"
+                  )
+                }
+              >
+                <ListItemText primary="Last 7 Days" sx={{ pl: 4 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key="Today" disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  navigate("/job-application-tracker-frontend/dashboard/today")
+                }
+              >
+                <ListItemText primary="Today" sx={{ pl: 4 }} />
+              </ListItemButton>
+            </ListItem>
+            <ListItem key="This Week" disablePadding>
+              <ListItemButton
+                onClick={() =>
+                  navigate(
+                    "/job-application-tracker-frontend/dashboard/this-week"
+                  )
+                }
+              >
+                <ListItemText primary="This Week" sx={{ pl: 4 }} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Collapse>
         <ListItem key="Home Page" disablePadding>
           <ListItemButton
             onClick={() => navigate("/job-application-tracker-frontend")}
@@ -108,19 +176,12 @@ function ResponsiveDrawer(props) {
               {username.toUpperCase()}
             </Typography>
           )}
-          <IconButton
-            color="inherit"
-            aria-label="toggle theme"
-            onClick={toggleTheme}
-          >
-            {themeMode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
         </Toolbar>
       </AppBar>
       <Box
         component="nav"
         sx={{
-          width: { sm: 120 },
+          width: { sm: "100px", marginLeft: "20px" },
           // Removed the flex-shrink properties
           "-ms-flex-negative": 0,
         }}
@@ -178,7 +239,6 @@ function ResponsiveDrawer(props) {
 ResponsiveDrawer.propTypes = {
   window: PropTypes.func,
   children: PropTypes.node.isRequired,
-  toggleTheme: PropTypes.func.isRequired,
 };
 
 export default ResponsiveDrawer;

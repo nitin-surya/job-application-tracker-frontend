@@ -38,12 +38,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const columns = [
-  { id: "company", label: "Company", minWidth: "16.6%" },
-  { id: "jobTitle", label: "Job Title", minWidth: "28.6%" },
+  { id: "company", label: "Company" },
+  { id: "jobTitle", label: "Job Title" },
   {
     id: "dateApplied",
     label: "Date Added",
-    minWidth: "20.6%",
+
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
@@ -58,21 +58,28 @@ const columns = [
   {
     id: "jobType",
     label: "Job Type",
-    minWidth: "12.6%",
+
+    align: "center",
+    //format: (value) => value.toLocaleString("en-US"),
+  },
+  {
+    id: "source",
+    label: "Source",
+
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "jobMode",
     label: "Job Mode",
-    minWidth: "12.6%",
+
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
   {
     id: "location",
     label: "location",
-    minWidth: "20.6%",
+
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
@@ -80,7 +87,7 @@ const columns = [
   {
     id: "status",
     label: "Status",
-    minWidth: "12.6%",
+
     align: "center",
     //format: (value) => value.toLocaleString("en-US"),
   },
@@ -90,8 +97,8 @@ const columns = [
   //   minWidth: "12.6%",
   //   align: "center",
   // },
-  { id: "edit", label: "", minWidth: "8.3", noLabel: true },
-  { id: "delete", label: "", minWidth: "8.3%", noLabel: true },
+  { id: "edit", label: "", noLabel: true },
+  { id: "delete", label: "", noLabel: true },
 
   // {
   //   id: "link",
