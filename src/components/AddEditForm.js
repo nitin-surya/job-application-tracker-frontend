@@ -61,10 +61,10 @@ const JobForm = (props) => {
     tempErrors.dateApplied = values.dateApplied
       ? ""
       : "Date Applied is required.";
-    tempErrors.location = values.location ? "" : "Location is required.";
-    tempErrors.jobType = values.jobType ? "" : "Job Type is required.";
+    // tempErrors.location = values.location ? "" : "Location is required.";
+    // tempErrors.jobType = values.jobType ? "" : "Job Type is required.";
     tempErrors.status = values.status ? "" : "Status is required.";
-    tempErrors.source = values.source ? "" : "Source is required.";
+    // tempErrors.source = values.source ? "" : "Source is required.";
     tempErrors.link = values.link
       ? /^https?:\/\/\S+$/.test(values.link)
         ? ""
@@ -174,7 +174,6 @@ const JobForm = (props) => {
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
-              required
               fullWidth
               label="Location"
               name="location"
@@ -208,11 +207,11 @@ const JobForm = (props) => {
 
           <Grid item xs={12} sm={4}>
             <FormControl fullWidth error={!!errors.jobType}>
-              <InputLabel required id="job-type-label">
+              <InputLabel  id="job-type-label">
                 Job Type
               </InputLabel>
               <Select
-                required
+      
                 labelId="job-type-label"
                 name="jobType"
                 label="Job Type"
@@ -260,7 +259,7 @@ const JobForm = (props) => {
 
           <Grid item xs={12} sm={4}>
             <FormControl fullWidth error={!!errors.source}>
-              <InputLabel required id="source-label">
+              <InputLabel id="source-label">
                 Source
               </InputLabel>
               <Select
@@ -281,6 +280,7 @@ const JobForm = (props) => {
                 <MenuItem value="Built In">Built In</MenuItem>
                 <MenuItem value="Zip Recruiter">Zip Recruiter</MenuItem>
                 <MenuItem value="Email">Email</MenuItem>
+                <MenuItem value="Careers Portal">Careers Portal</MenuItem>
               </Select>
               <FormHelperText>{errors.source}</FormHelperText>
             </FormControl>

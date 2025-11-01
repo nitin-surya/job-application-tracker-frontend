@@ -55,34 +55,34 @@ const columns = [
   //   align: "center",
   //   //format: (value) => value.toLocaleString("en-US"),
   // },
-  {
-    id: "jobType",
-    label: "Job Type",
+  // {
+  //   id: "jobType",
+  //   label: "Job Type",
 
-    align: "center",
-    //format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "source",
-    label: "Source",
+  //   align: "center",
+  //   //format: (value) => value.toLocaleString("en-US"),
+  // },
+  // {
+  //   id: "source",
+  //   label: "Source",
 
-    align: "center",
-    //format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "jobMode",
-    label: "Job Mode",
+  //   align: "center",
+  //   //format: (value) => value.toLocaleString("en-US"),
+  // },
+  // {
+  //   id: "jobMode",
+  //   label: "Job Mode",
 
-    align: "center",
-    //format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "location",
-    label: "location",
+  //   align: "center",
+  //   //format: (value) => value.toLocaleString("en-US"),
+  // },
+    // {
+    //   id: "location",
+    //   label: "location",
 
-    align: "center",
-    //format: (value) => value.toLocaleString("en-US"),
-  },
+    //   align: "center",
+    //   //format: (value) => value.toLocaleString("en-US"),
+    // },
 
   {
     id: "status",
